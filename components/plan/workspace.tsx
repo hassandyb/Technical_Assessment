@@ -10,6 +10,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { AllocationTrace } from '@/components/plan/allocation-trace';
+import { AssistantPanel } from '@/components/plan/assistant-panel';
 import { ClientTable } from '@/components/plan/client-table';
 import { ProductionTable } from '@/components/plan/production-table';
 import type { PlanResult } from '@/lib/domain/types';
@@ -80,6 +81,8 @@ export function Workspace({ plan }: { plan: PlanResult }) {
       <ProductionTable plan={plan} trace={trace} />
 
       <AllocationTrace plan={plan} selectedId={selectedId} />
+
+      <AssistantPanel />
     </div>
   );
 }
