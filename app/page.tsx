@@ -6,6 +6,7 @@
  */
 
 import { Headline } from '@/components/plan/headline';
+import { RetryButton } from '@/components/plan/retry-button';
 import { WorkbookProblem } from '@/components/plan/workbook-problem';
 import { Workspace } from '@/components/plan/workspace';
 import { tonnes } from '@/lib/format';
@@ -23,27 +24,32 @@ export default function PlanningWorkspace() {
 
   return (
     <main className="mx-auto w-full max-w-[1400px] px-6 py-8">
-      <header className="mb-6">
-        <p className="text-sm font-medium text-muted-foreground">
-          Atlas Fresh · Production and Commercial
-        </p>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight">Daily export plan</h1>
-        {outcome.ok && (
-          <p className="mt-2 text-sm text-muted-foreground">
-            Workbook validated · {outcome.plan.farms.length} farms ·{' '}
-            {outcome.plan.clients.length} clients · station capacity{' '}
-            {tonnes(outcome.plan.kpis.capacityT)}
+      <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="text-sm font-medium text-muted-foreground">
+            Atlas Fresh · Production and Commercial
           </p>
-        )}
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight">Daily export plan</h1>
+          {outcome.ok && (
+            <p className="mt-2 text-sm text-muted-foreground">
+              Workbook validated · {outcome.plan.farms.length} farms ·{' '}
+              {outcome.plan.clients.length} clients · station capacity{' '}
+              {tonnes(outcome.plan.kpis.capacityT)}
+            </p>
+          )}
+        </div>
+        {outcome.ok && <RetryButton />}
       </header>
 
       {outcome.ok ? (
-        <div className="space-y-8">
+        <div id="workspace" className="space-y-8">
           <Headline plan={outcome.plan} />
           <Workspace plan={outcome.plan} />
         </div>
       ) : (
-        <WorkbookProblem failure={outcome.failure} />
+        <div id="workspace">
+          <WorkbookProblem failure={outcome.failure} />
+        </div>
       )}
     </main>
   );

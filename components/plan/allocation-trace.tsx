@@ -94,6 +94,13 @@ export function AllocationTrace({
             </tr>
           </thead>
           <tbody>
+            {visible.length === 0 && (
+              <tr>
+                <td colSpan={6} className="px-4 py-8 text-center text-muted-foreground">
+                  No fruit was exported. Every tonne that arrived went to the local market.
+                </td>
+              </tr>
+            )}
             {visible.map((row, index) => (
               <tr
                 key={`${row.farmId}-${row.segment}-${row.clientId}-${index}`}
@@ -151,6 +158,13 @@ export function AllocationTrace({
             </tr>
           </thead>
           <tbody>
+            {local.length === 0 && (
+              <tr>
+                <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
+                  Nothing fell back to the local market: the whole crop was exported.
+                </td>
+              </tr>
+            )}
             {local.map((row) => (
               <tr key={`${row.farmId}-${row.segment}`} className="border-b last:border-0">
                 <td className="px-4 py-2 font-medium">{row.farmId}</td>

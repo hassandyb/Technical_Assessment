@@ -7,6 +7,7 @@
  */
 
 import { FileWarning, ServerCrash } from 'lucide-react';
+import { RetryButton } from '@/components/plan/retry-button';
 import type { ApiError } from '@/lib/api/contract';
 import { describeIssue } from '@/lib/data/validate';
 
@@ -45,6 +46,12 @@ export function WorkbookProblem({ failure }: { failure: ApiError }) {
               </ul>
             </>
           )}
+
+          <div className="mt-5">
+            <RetryButton
+              label={fixable ? 'I have fixed the workbook — reload' : 'Try again'}
+            />
+          </div>
         </div>
       </div>
     </section>
