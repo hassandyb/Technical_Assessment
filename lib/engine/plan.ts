@@ -68,5 +68,6 @@ export function plan(input: PlanInput): PlanResult {
     clients,
     farms,
     kpis: computeKpis(input, allocations, remainingLots, clients),
+    station: input.station,
   };
 }

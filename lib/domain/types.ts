@@ -142,4 +142,10 @@ export interface PlanResult {
   clients: ClientResult[];
   farms: FarmResult[];
   kpis: Kpis;
+  /**
+   * The station settings the plan was built with. Echoed back so the interface
+   * and the assistant can price the local residual without re-reading the
+   * workbook; it is input, not a computed figure.
+   */
+  station: Station;
 }
