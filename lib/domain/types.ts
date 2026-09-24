@@ -127,7 +127,10 @@ export interface Kpis {
   exportRevenueEur: number;
   localValueEur: number;
   totalValueEur: number;
-  /** What the local residual would have earned at full export price. */
+  /**
+   * Value destroyed by selling the residual locally instead of exporting it:
+   * the gap between its export price and the 10% the local market pays.
+   */
   forgoneValueEur: number;
   /** Clients that are PARTIAL or UNSERVED. */
   atRiskClientCount: number;
