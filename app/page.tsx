@@ -5,6 +5,7 @@
  * and the browser only ever receives the finished plan.
  */
 
+import { ClientTable } from '@/components/plan/client-table';
 import { Headline } from '@/components/plan/headline';
 import { WorkbookProblem } from '@/components/plan/workbook-problem';
 import { tonnes } from '@/lib/format';
@@ -37,7 +38,10 @@ export default function PlanningWorkspace() {
       </header>
 
       {outcome.ok ? (
-        <Headline plan={outcome.plan} />
+        <div className="space-y-8">
+          <Headline plan={outcome.plan} />
+          <ClientTable plan={outcome.plan} />
+        </div>
       ) : (
         <WorkbookProblem failure={outcome.failure} />
       )}
