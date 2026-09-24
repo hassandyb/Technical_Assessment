@@ -11,6 +11,9 @@ out/
 build/
 next-env.d.ts
 
+# TypeScript incremental build cache
+*.tsbuildinfo
+
 # Environment / secrets — never commit
 .env
 .env*.local
