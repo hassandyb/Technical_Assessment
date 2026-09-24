@@ -25,7 +25,15 @@ const STATUS_LABELS = {
   UNSERVED: 'Unserved',
 } as const;
 
-export function ClientTable({ plan }: { plan: PlanResult }) {
+export function ClientTable({
+  plan,
+  selectedId,
+  onSelect,
+}: {
+  plan: PlanResult;
+  selectedId: string | null;
+  onSelect: (clientId: string) => void;
+}) {
   const { capacityT } = plan.kpis;
   const atRisk = plan.clients.filter((entry) => entry.status !== 'COMPLETE');
   const revenueAtRisk = atRisk.reduce(
@@ -45,6 +53,9 @@ export function ClientTable({ plan }: { plan: PlanResult }) {
           not captured
         </p>
       </div>
+      <p className="text-sm text-muted-foreground">
+        Select a client to see which farms supplied it and which missed the quality it needed.
+      </p>
 
       <div className="overflow-x-auto rounded-lg border bg-card">
         <table className="w-full min-w-[820px] text-sm">
@@ -85,10 +96,24 @@ export function ClientTable({ plan }: { plan: PlanResult }) {
               const missedRevenue = entry.remainingT * entry.client.exportPricePerT;
 
               return (
-                <tr key={entry.client.id} className="border-b last:border-0 align-top">
+                <tr
+                  key={entry.client.id}
+                  className={`border-b align-top last:border-0 ${
+                    selectedId === entry.client.id ? 'bg-sky-50 dark:bg-sky-950/40' : ''
+                  }`}
+                >
                   <td className="px-4 py-3">
-                    <div className="font-medium">{entry.client.id}</div>
-                    <div className="text-xs text-muted-foreground">{entry.client.name}</div>
+                    <button
+                      type="button"
+                      onClick={() => onSelect(entry.client.id)}
+                      aria-pressed={selectedId === entry.client.id}
+                      className="rounded text-left underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                    >
+                      <span className="font-medium">{entry.client.id}</span>
+                      <span className="block text-xs text-muted-foreground">
+                        {entry.client.name}
+                      </span>
+                    </button>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">
                     {describeRule(entry.client)}

@@ -31,3 +31,8 @@ export function isCompatible(
 export function qualityUpgrade(supplySegment: Segment, requested: Segment): number {
   return segmentRank(requested) - segmentRank(supplySegment);
 }
+
+/** Every grade that could have served this order, best first. */
+export function compatibleSegments(mode: AcceptanceMode, requested: Segment): Segment[] {
+  return SEGMENTS.filter((candidate) => isCompatible(candidate, mode, requested));
+}
