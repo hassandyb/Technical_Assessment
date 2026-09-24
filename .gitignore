@@ -30,3 +30,7 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Next.js auto-generated agent instruction files (re-created by `next dev`)
+AGENTS.md
+CLAUDE.md
